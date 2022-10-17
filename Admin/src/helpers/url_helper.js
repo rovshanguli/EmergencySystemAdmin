@@ -21,6 +21,7 @@ export const GET_APPEALTYPE_BY_ID = "http://emeergencyapp.us-east-1.elasticbeans
 
 //Brigade
 export const GET_BRIGADE = "http://emeergencyapp.us-east-1.elasticbeanstalk.com/api/Brigade/GetAllBrigadesWithWokringStatus"
+export const REGISTER_BRIGADE = "http://emeergencyapp.us-east-1.elasticbeanstalk.com/api/Account/RegisterBrigade"
 
 // Language
 export const GET_LANGUAGE = "http://emeergencyapp.us-east-1.elasticbeanstalk.com/api/Language/GetAll"

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { post, del, get, put } from "../../helpers/api_helper"
 import * as url from "../../helpers/url_helper"
 import Breadcrumbs from "../../components/Common/Breadcrumb"
-import { Link } from "react-router-dom"
 import {
     Table,
     Card,
@@ -19,6 +18,10 @@ function Index() {
     const [brigades, setBrigades] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [error, setError] = React.useState(null)
+    const [name, setName] = useState("")
+    const [region, setRegion] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirm_password, setConfirmPassword] = useState("")
 
     React.useEffect(() => {
         setLoading(true)
@@ -40,6 +43,36 @@ function Index() {
     function removeBodyCss() {
         document.body.classList.add("no_padding")
     }
+    
+
+    const registerBrigade = () => {
+        debugger
+        if (password === confirm_password) {
+            let data = {
+                username: name,
+                region: region,
+                password: password
+            }
+            post(url.REGISTER_BRIGADE, data, config)
+                .then(response => {
+                    tog_register()
+                    setLoading(true)
+                    alert("Success", "Brigade has been registered", "success")
+                    get(url.GET_BRIGADE, config)
+                    .then(response => {
+                        setBrigades(response)
+                        setLoading(false)
+                    })
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        } else {
+            alert("Password and Confirm Password must be same")
+        }
+    }
+
+                
 
 
 
@@ -54,7 +87,7 @@ function Index() {
                             <CardBody>
                                 <div className="table-responsive">
                                     <div>
-                                        <button style={{ float: 'right' }} type="button" onClick = {() => tog_register()} className="btn btn-primary waves-effect waves-light">
+                                        <button style={{ float: 'right' }} type="button" onClick={() => tog_register()} className="btn btn-primary waves-effect waves-light">
                                             Create Brigade
                                         </button>
                                     </div>
@@ -113,6 +146,41 @@ function Index() {
                                     </button>
                                 </div>
                                 <div className="modal-body">
+                                    <div className="col-md-12 mb-2">
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="Name"
+                                            onChange={(e) => setName(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-md-12 mb-2">
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="Region"
+                                            defaultValue = ""
+                                            onChange={(e) => setRegion(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-md-12 mb-2">
+                                        <input
+                                            className="form-control"
+                                            type="password"
+                                            placeholder="Password"
+                                            style = {{defaultValue : ""}}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-md-12 mb-2">
+                                        <input
+                                            className="form-control"
+                                            type="password"
+                                            placeholder="Confirm Password"
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                        />
+                                    </div>
+
 
                                 </div>
                                 <div className="modal-footer">
@@ -129,8 +197,9 @@ function Index() {
                                     <button
                                         type="button"
                                         className="btn btn-primary waves-effect waves-light"
+                                        onClick={() => registerBrigade()}
                                     >
-                                        Save changes
+                                        Register
                                     </button>
                                 </div>
                             </Modal>
