@@ -113,7 +113,7 @@ const SidebarContent = props => {
               </Link>
             </li>
             <li>
-              <Link to="/appeal" className="waves-effect">
+              <Link to="/brigade" className="waves-effect">
                 <i className="mdi mdi-inbox-full"></i>
                 <span>{props.t("Brigades")}</span>
               </Link>

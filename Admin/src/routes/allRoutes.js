@@ -32,6 +32,9 @@ import TicketStatus from "../pages/TicketStatus/Index"
 // Ticket Type
 import AppealType from "../pages/AppealType/Index"
 
+//Brigades
+import Brigades from "../pages/Brigades/Index"
+
 
 // Authentication related pages
 import Login from "../pages/Authentication/Login"
@@ -69,6 +72,9 @@ const userRoutes = [
   // //Appeal
   { path: "/appeal", component: Appeal },
   { path: "/appealdetail/:id", component: AppealDetail},
+
+  // //Brigades
+  { path: "/brigade", component: Brigades },
 
 
 

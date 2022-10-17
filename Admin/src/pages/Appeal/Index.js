@@ -87,10 +87,8 @@ function Index() {
     }
 
 
-    //create ticket
     const createTicket = () => {
         let adress = JSON.parse(localStorage.getItem("center"))
-        console.log(adress);
         let data = {
             "appealsId": selected,
             "brigadeId": JSON.parse(selectedBrigade).id,
@@ -111,7 +109,7 @@ function Index() {
     return (
         <React.Fragment>
             <div className="page-content">
-                <Breadcrumbs title="Forms" breadcrumbItem="Form Wizard" />
+                <Breadcrumbs title="Forms" breadcrumbItem="Appeal" />
                 <Row>
                     <Col lg="12">
                         <Card>
