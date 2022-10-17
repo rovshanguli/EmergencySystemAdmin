@@ -24,6 +24,7 @@ import UpdateInfo from "../pages/Info/UpdateInfo"
 
 // Appeal
 import Appeal from "../pages/Appeal/Index"
+import AppealDetail from "../pages/Appeal/AppealDetail"
 
 // TicketStatus
 import TicketStatus from "../pages/TicketStatus/Index"
@@ -67,6 +68,7 @@ const userRoutes = [
 
   // //Appeal
   { path: "/appeal", component: Appeal },
+  { path: "/appealdetail/:id", component: AppealDetail},
 
 
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { MDBDataTable } from "mdbreact"
 import { post, del, get, put } from "../../helpers/api_helper"
 import * as url from "../../helpers/url_helper"
-import Map from "../../pages/Maps/MapsGoogle"
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import MyMap from "../Maps/MapsGoogle";
+
 
 
 import {
@@ -18,19 +18,15 @@ import {
     NavLink,
     TabContent,
     TabPane,
+    Button
 } from "reactstrap"
 
 import classnames from "classnames"
 import { Link } from "react-router-dom"
 
 
-
-import Select from "react-select";
-
-
 const newSelected = [];
-let currentPage;
-
+let count = 1;
 
 
 function Index() {
@@ -38,11 +34,13 @@ function Index() {
     const [appeal, setAppeal] = useState([])
     const [brigade, setBrigade] = useState([])
     const [selected, setSelected] = useState(newSelected)
-    const [selectedGroup, setselectedGroup] = useState(null);
+    const [selectedBrigade, setSelectedBrigade] = useState('{"name":"Secilmeyib"}')
+    const [description, setDescription] = useState("")
+
 
 
     useEffect(() => {
-        get(url.GET_APPEAL).then(res => {
+        get(url.GET_APPEAL_PAGINATE + `page=${1}&pageSize=10`).then(res => {
             setAppeal(res)
         })
 
@@ -56,12 +54,11 @@ function Index() {
 
 
 
-
     const clicked = (e) => {
-        if (!newSelected.includes(e.target.id)) {
-            newSelected.push(e.target.id)
+        if (!newSelected.includes(e.target.value)) {
+            newSelected.push(e.target.value)
         } else {
-            newSelected.splice(newSelected.indexOf(e.target.id), 1)
+            newSelected.splice(newSelected.indexOf(e.target.value), 1)
         }
         setSelected(newSelected)
     }
@@ -71,22 +68,13 @@ function Index() {
 
 
 
-
-    function handleSelectGroup(selectedGroup) {
-        setselectedGroup(selectedGroup);
-    }
-
-
-
-
-
-    const optionGroup = [
-        {
-            label: "Brigade",
-            options: brigade
-        }
-    ];
-
+    //Onpage change
+    const handlePageChange = (e, value) => {
+        e.preventDefault();
+        get(url.GET_APPEAL_PAGINATE + `page=${value}&pageSize=10`).then(res => {
+            setAppeal(res)
+        })
+    };
 
     const [activeTab, setactiveTab] = useState(1)
 
@@ -98,6 +86,27 @@ function Index() {
         }
     }
 
+
+    //create ticket
+    const createTicket = () => {
+        let adress = JSON.parse(localStorage.getItem("center"))
+        console.log(adress);
+        let data = {
+            "appealsId": selected,
+            "brigadeId": JSON.parse(selectedBrigade).id,
+            "description": description,
+            "lat": adress.lat.toString(),
+            "long": adress.lng.toString(),
+        }
+        post(url.CREATE_TICKET, data, config).then(res => {
+            if (res.status === 200) {
+                alert("Tiket yaradildi")
+            }
+            else {
+                alert("Tiket yaradilmadi")
+            }
+        })
+    }
 
     return (
         <React.Fragment>
@@ -164,16 +173,6 @@ function Index() {
                                         >
                                             <TabPane tabId={1}>
                                                 <Row>
-                                                    <Col lg="4" >
-                                                        <Select
-                                                            value={selectedGroup}
-                                                            onChange={() => {
-                                                                handleSelectGroup();
-                                                            }}
-                                                            options={optionGroup}
-                                                            classNamePrefix="select2-selection"
-                                                        />
-                                                    </Col>
                                                     <Col className="col-12">
                                                         <Card>
                                                             <CardBody>
@@ -189,16 +188,37 @@ function Index() {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {appeal.map((item, index) => {
+                                                                        {appeal?.datas?.map((item, index) => {
                                                                             return (
-                                                                                <tr key={index}>
+                                                                                <tr key={item.id}>
+                                                                                    <th scope="row">
+                                                                                        {index + 1}
+                                                                                    </th>
+                                                                                    <td>{item.createdByUsername}</td>
+                                                                                    <td>{item.adress}</td>
+                                                                                    <td>{item.lat}</td>
+                                                                                    <td>{item.long}</td>
+                                                                                    <td>{item.createdAt}</td>
+                                                                                    <td>
+                                                                                        <Link to={`/appealdetail/${item.id}`} className="waves-effect" >
+                                                                                            <Button
+                                                                                                color="success"
+                                                                                                outline
+                                                                                                className="waves-effect waves-light"
+                                                                                            >
+                                                                                                Detail
+                                                                                            </Button>{""}
+                                                                                        </Link>
+                                                                                    </td>
                                                                                     <th scope="row">
                                                                                         <div className="custom-control custom-checkbox">
                                                                                             <input
                                                                                                 type="checkbox"
                                                                                                 className="custom-control-input"
+                                                                                                value={item.id}
                                                                                                 id={item.id}
                                                                                                 onClick={clicked}
+                                                                                                defaultChecked={selected.includes(item.id.toString())}
                                                                                             />
                                                                                             <label
                                                                                                 className="custom-control-label"
@@ -208,34 +228,62 @@ function Index() {
                                                                                             </label>
                                                                                         </div>
                                                                                     </th>
-                                                                                    <td>{item.createdByUsername}</td>
-                                                                                    <td>{item.adress}</td>
-                                                                                    <td>{item.lat}</td>
-                                                                                    <td>{item.long}</td>
-                                                                                    <td>{item.createdAt}</td>
                                                                                 </tr>
                                                                             )
                                                                         })}
                                                                     </tbody>
-                                                                    
                                                                 </Table>
+                                                                <Stack spacing={2}>
+                                                                    <Pagination count={appeal.totalPages} color="primary"
+                                                                        onChange={(e, page) => {
+                                                                            handlePageChange(e, page)
+                                                                        }}
+                                                                    />
+                                                                </Stack>
                                                             </CardBody>
                                                         </Card>
                                                     </Col>
                                                 </Row>
                                             </TabPane>
-
                                             <TabPane tabId={2}>
                                                 <Row>
-                                                    <Map />
+                                                    <MyMap />
                                                 </Row>
                                             </TabPane>
                                             <TabPane tabId={3}>
-
-
-
+                                                <Row>
+                                                    <select className="form-select" onChange={(e) => setSelectedBrigade(e.target.value)} size="20" aria-label="size 3 select example">
+                                                        {brigade?.map((item, index) => {
+                                                            return (
+                                                                <option disabled={item.isWorking} key={item.id} value={JSON.stringify(item)}>{item.name}</option>
+                                                            )
+                                                        })}
+                                                    </select>
+                                                </Row>
                                             </TabPane>
-
+                                            <TabPane tabId={4}>
+                                                <Row>
+                                                    <Col className="col-12">
+                                                        <Card>
+                                                            <CardBody>
+                                                                <div className="text-nowrap" >
+                                                                    Secilen umumi sikayetlerin sayi: {selected?.length}
+                                                                </div>
+                                                                <div className="text-nowrap mb-4" >
+                                                                    Secilen brigada: {JSON.parse(selectedBrigade)?.name}
+                                                                </div>
+                                                                <div>
+                                                                    <label htmlFor="">Note</label>
+                                                                    <textarea onChange={(e) => setDescription(e.target.value)} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                </div>
+                                                                <div className="text-nowrap mt-4" >
+                                                                    <Button color="primary" onClick={() => createTicket()} style={{float: 'right'}}>Create Ticket</Button>
+                                                                </div>
+                                                            </CardBody>
+                                                        </Card>
+                                                    </Col>
+                                                </Row>
+                                            </TabPane>
                                         </TabContent>
                                     </div>
                                     <div className="actions clearfix">
@@ -275,9 +323,16 @@ function Index() {
                         </Card>
                     </Col>
                 </Row>
+
+
             </div>
         </React.Fragment>
     )
 }
 
 export default Index
+
+
+
+
+

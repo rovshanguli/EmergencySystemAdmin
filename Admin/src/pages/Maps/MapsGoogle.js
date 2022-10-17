@@ -29,14 +29,35 @@ const MapsGoogle = props => {
       if (status === "OK") {
         setCenter({
           lat: results[0].geometry.location.lat(),
-          lng: results[0].geometry.location.lng()
+          lng: results[0].geometry.location.lng(),
+          address: results[0].formatted_address
         })
       } else {
         alert("Unvan Tapilmadi: " + status);
       }
     });
-    props.location(center)
   }
+
+  //find adress from long lat
+
+  const findLongLat = (long, lat) => {
+    const geocoder = new window.google.maps.Geocoder();
+    const latlng = { lat: parseFloat(lat), lng: parseFloat(long) };
+    geocoder.geocode({ location: latlng }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+           return results[0].formatted_address
+        } else {
+          window.alert("No results found");
+        }
+      } else {
+        window.alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+  
+
+  localStorage.setItem("center", JSON.stringify(center))
 
   return (
     <React.Fragment>
@@ -81,7 +102,8 @@ const MapsGoogle = props => {
                   const { latLng } = coord;
                   const lat = latLng.lat();
                   const lng = latLng.lng();
-                  setCenter({ lat, lng });
+                  const adress = findLongLat(lat, lng);
+                  setCenter({ lat, lng, adress });
                 }}
               >
 
