@@ -18,7 +18,8 @@ import {
     NavLink,
     TabContent,
     TabPane,
-    Button
+    Button,
+    Spinner
 } from "reactstrap"
 
 import classnames from "classnames"
@@ -36,12 +37,15 @@ function Index() {
     const [selected, setSelected] = useState(newSelected)
     const [selectedBrigade, setSelectedBrigade] = useState('{"name":"Secilmeyib"}')
     const [description, setDescription] = useState("")
+    const [loading, setLoading] = useState(false)
 
 
 
     useEffect(() => {
         get(url.GET_APPEAL_PAGINATE + `page=${1}&pageSize=10`).then(res => {
+            setLoading(true)
             setAppeal(res)
+            setLoading(false)
         })
 
         get(url.GET_BRIGADE, config).then(res => {
@@ -62,10 +66,6 @@ function Index() {
         }
         setSelected(newSelected)
     }
-
-
-
-
 
 
     //Onpage change
@@ -174,6 +174,7 @@ function Index() {
                                                     <Col className="col-12">
                                                         <Card>
                                                             <CardBody>
+                                                            {loading && <Spinner className="m-1" color="primary" />}
                                                                 <Table className="table mb-0">
                                                                     <thead>
                                                                         <tr>
@@ -186,6 +187,7 @@ function Index() {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        
                                                                         {appeal?.datas?.map((item, index) => {
                                                                             return (
                                                                                 <tr key={item.id}>
