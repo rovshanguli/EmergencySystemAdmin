@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import ReactAudioPlayer from 'react-audio-player';
 import { post, del, get, put } from "../../helpers/api_helper";
@@ -12,6 +12,7 @@ import {
     Row,
     Col,
 } from "reactstrap"
+import { Link } from 'react-router-dom';
 
 
 function AppealDetail() {
@@ -24,7 +25,7 @@ function AppealDetail() {
 
     //Get Appeal
     function getappeal(params) {
-        get(url.GET_APPEALTYPE_BY_ID + 25, params)
+        get(url.GET_APPEALTYPE_BY_ID + id, params)
             .then(response => {
                 setAppeal(response)
                 setLoading(false)
@@ -42,9 +43,7 @@ function AppealDetail() {
     }, [])
 
 
-    console.log(appeal);
 
-    console.log("http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.audio);
 
 
     return (
@@ -52,19 +51,28 @@ function AppealDetail() {
             <div className="page-content">
                 <Breadcrumbs title="Appeal" breadcrumbItem="Appeal Detail" />
                 <Row>
+
                     <Col lg={12}>
+                        <Link to="/appeal" className="btn btn-primary btn-sm">
+                            Go Back
+                        </Link>
                         <Card>
                             <CardBody>
-                                <ReactAudioPlayer
-                                    src= {"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.audioUrl}
-                                    autoPlay
-                                    controls
-                                />
-                                <ReactPlayer
-                                    url= {"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.videoUrl}
-                                    controls
-                                />
-
+                                <CardTitle className="mb-4">Appeal Video</CardTitle>
+                                {appeal?.videoUrl ? <ReactPlayer url={"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.videoUrl} controls={true} width="40%" height="50%" /> : <p>No Video</p>}
+                                {appeal?.audioUrl ? <ReactAudioPlayer src={"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.audioUrl} controls /> : <p>No Audio</p>}
+                            </CardBody>
+                            <CardBody>
+                                <CardTitle className="mb-4">Appeal Audio</CardTitle>
+                                
+                            </CardBody>
+                            <CardBody>
+                                <CardTitle className="mb-4">Appeal Text</CardTitle>
+                                {appeal?.Note ? <img src={"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.note} alt="image" /> : <p>No Note</p>}
+                            </CardBody>
+                            <CardBody>
+                                <CardTitle className="mb-4">Appeal Image</CardTitle>
+                                {appeal?.image ? <img src={"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.image} alt="image" /> : <p>No Image</p>}
                             </CardBody>
                         </Card>
                     </Col>
