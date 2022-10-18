@@ -105,7 +105,7 @@ function Index() {
                                             {error && <tr><td>{error}</td></tr>}
                                             {brigades.map((brigade, index) => (
                                                 <tr key={index}>
-                                                    <th scope="row">{index}</th>
+                                                    <th scope="row">{index+1}</th>
                                                     <td>{brigade.name}</td>
                                                     <td>{brigade.region}</td>
                                                     <td>
