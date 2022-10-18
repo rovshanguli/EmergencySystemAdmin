@@ -121,7 +121,7 @@ const SidebarContent = props => {
             <li>
               <Link to="/ticket" className="waves-effect">
                 <i className="mdi mdi-inbox-full"></i>
-                <span>{props.t("Brigades")}</span>
+                <span>{props.t("Tickets")}</span>
               </Link>
             </li>
           </ul>

@@ -35,6 +35,9 @@ import AppealType from "../pages/AppealType/Index"
 //Brigades
 import Brigades from "../pages/Brigades/Index"
 
+//Tickets
+import Tickets from "../pages/Ticket/Index"
+
 
 // Authentication related pages
 import Login from "../pages/Authentication/Login"
@@ -75,6 +78,9 @@ const userRoutes = [
 
   // //Brigades
   { path: "/brigade", component: Brigades },
+
+  // //Ticket
+  { path: "/ticket", component: Tickets },
 
 
 
