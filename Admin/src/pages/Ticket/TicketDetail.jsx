@@ -4,7 +4,8 @@ import { Col, Card, CardBody, Table, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { post, del, get, put } from "../../helpers/api_helper";
 import * as url from "../../helpers/url_helper";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { Wrapper, Map, Marker } from '@googlemaps/react-wrapper';
+import { PropTypes } from 'prop-types';
 
 
 function TicketDetail() {
@@ -18,19 +19,9 @@ function TicketDetail() {
     }, [])
     console.log(ticket);
 
-    const defaultProps = {
-        center: {
-            lat: 10.99835602,
-            lng: 77.01502627
-        },
-        zoom: 11
-    };
 
-    //Container style
-    const containerStyle = new {
-        width: '100%',
-        height: '400px'
-    };
+
+
 
     return (
         <React.Fragment>
@@ -66,16 +57,12 @@ function TicketDetail() {
                                         )
                                     })}
                                 </tbody>
-                                 <GoogleMap
-                                    
-                                >
-                                    <Marker
-                                        position={{1.3521 : 103.8198}}
-                                    />
-                                </GoogleMap>
 
-                               
+
+
+
                             </Table>
+                            
                         </CardBody>
                     </Card>
                 </Col>
@@ -83,6 +70,10 @@ function TicketDetail() {
         </React.Fragment>
     )
 }
+
+
+
+
 
 export default TicketDetail
 

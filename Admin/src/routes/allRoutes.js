@@ -37,7 +37,7 @@ import Brigades from "../pages/Brigades/Index"
 
 //Tickets
 import Tickets from "../pages/Ticket/Index"
-import TicketDetail from "../pages/Ticket/TicketDetail"
+import TicketDetail from "../pages/Ticket/TicketDetail.jsx"
 
 
 // Authentication related pages
