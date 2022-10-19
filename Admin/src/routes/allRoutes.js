@@ -37,6 +37,7 @@ import Brigades from "../pages/Brigades/Index"
 
 //Tickets
 import Tickets from "../pages/Ticket/Index"
+import TicketDetail from "../pages/Ticket/TicketDetail"
 
 
 // Authentication related pages
@@ -81,6 +82,7 @@ const userRoutes = [
 
   // //Ticket
   { path: "/ticket", component: Tickets },
+  { path: "/ticketdetail/:id", component: TicketDetail },
 
 
 

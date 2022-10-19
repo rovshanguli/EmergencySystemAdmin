@@ -10,11 +10,11 @@ import Stack from '@mui/material/Stack';
 
 
 function Index() {
-
+    let config = { headers: { Authorization: "Bearer " + JSON.parse(localStorage.getItem("authUser")) } }
     const [tickets, setTickets] = useState([])
 
     useEffect(() => {
-        get(url.GET_TICKET_PAGINATE + 1).then(data => {
+        get(url.GET_TICKET_PAGINATE + 1, config).then(data => {
             setTickets(data)
         })
     }, [])
@@ -25,7 +25,6 @@ function Index() {
             setTickets(res)
         })
     };
-
 
 
     return (
@@ -39,6 +38,7 @@ function Index() {
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>TicketId</th>
                                         <th>CreatedByUsername</th>
                                         <th>Assigned To</th>
                                         <th>CreatedAt</th>
@@ -52,12 +52,13 @@ function Index() {
                                                 <th scope="row">
                                                     {index + 1}
                                                 </th>
+                                                <td>{item.id}</td>
                                                 <td>{item.createdBy}</td>
                                                 <td>{item.assignedTo}</td>
                                                 <td>{item.createdAt}</td>
                                                 <td>{item.status}</td>
                                                 <td>
-                                                    <Link to={`/appealdetail/${item.id}`} className="waves-effect" >
+                                                    <Link to={`/ticketdetail/${item.id}`} className="waves-effect" >
                                                         <Button
                                                             color="success"
                                                             outline
@@ -67,14 +68,11 @@ function Index() {
                                                         </Button>{""}
                                                     </Link>
                                                 </td>
-                                               
-
                                             </tr>
                                         )
                                     })}
                                 </tbody>
                             </Table>
-
                             <Stack spacing={2}>
                                 <Pagination count={tickets?.totalPages} color="primary"
                                     onChange={(e, page) => {
