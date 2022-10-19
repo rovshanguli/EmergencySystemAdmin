@@ -26,3 +26,8 @@ export const REGISTER_BRIGADE = "http://emeergencyapp.us-east-1.elasticbeanstalk
 
 // Language
 export const GET_LANGUAGE = "http://emeergencyapp.us-east-1.elasticbeanstalk.com/api/Language/GetAll"
+
+
+//Ticket
+export const GET_TICKET_PAGINATE = "https://localhost:7045/api/Ticket/GetAllPaginate/"
+export const GET_TICKET_BY_ID = "http://emeergencyapp.us-east-1.elasticbeanstalk.com/api/Ticket/GetById/"
