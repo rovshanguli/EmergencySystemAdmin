@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import { Col, Card, CardBody, Table, Button } from "reactstrap";
-import { Link } from "react-router-dom";
 import { post, del, get, put } from "../../helpers/api_helper";
 import * as url from "../../helpers/url_helper";
-import { Wrapper, Map, Marker } from '@googlemaps/react-wrapper';
-import { PropTypes } from 'prop-types';
+import Map from "../../pages/Maps/StaticMap";
 
 
 function TicketDetail() {
     let config = { headers: { Authorization: "Bearer " + JSON.parse(localStorage.getItem("authUser")) } }
+    const location = window.location.href.split("/");
+    const id = location[location.length - 1];
     const [ticket, setTicket] = useState(null)
 
     useEffect(() => {
-        get(url.GET_TICKET_BY_ID + 6, config).then(data => {
+        get(url.GET_TICKET_BY_ID + id, config).then(data => {
             setTicket(data)
         })
     }, [])
     console.log(ticket);
 
-
-
-
+    let center = {
+        lat: parseFloat(ticket?.lat),
+        lng: parseFloat(ticket?.long)
+    }
 
     return (
         <React.Fragment>
@@ -57,12 +58,14 @@ function TicketDetail() {
                                         )
                                     })}
                                 </tbody>
-
-
-
-
                             </Table>
-                            
+
+                            {
+                                center?.lat == NaN || center.long == NaN ? <div></div> : <Map center={center} />
+                            }
+
+
+
                         </CardBody>
                     </Card>
                 </Col>

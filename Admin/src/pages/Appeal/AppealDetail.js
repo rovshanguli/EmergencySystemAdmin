@@ -24,8 +24,8 @@ function AppealDetail() {
     const [error, setError] = useState(null);
 
     //Get Appeal
-    function getappeal(params) {
-        get(url.GET_APPEALTYPE_BY_ID + id, params)
+    function getappeal() {
+        get(url.GET_APPEAL_BY_ID + id)
             .then(response => {
                 setAppeal(response)
                 setLoading(false)
@@ -43,6 +43,7 @@ function AppealDetail() {
     }, [])
 
 
+    console.log(appeal);
 
 
 

@@ -97,6 +97,7 @@ function Index() {
             "long": adress.lng.toString(),
         }
         post(url.CREATE_TICKET, data, config).then(res => {
+            console.log(res);
             if (res.status === 200) {
                 alert("Tiket yaradildi")
             }
