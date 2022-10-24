@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import {
     Table,
     Row,
@@ -11,16 +10,29 @@ import {
     CardImg
 } from "reactstrap"
 import { Link } from 'react-router-dom';
+import { post, del, get, put } from "../../helpers/api_helper"
+import * as url from "../../helpers/url_helper"
 import { Reorder } from "framer-motion/dist/framer-motion";
 
 
 
 function Index() {
     const [items, setItems] = useState([
-        'GeeksforGeeks',
-        'GFG',
-        'Computer Science Portal'
+        {name: "GG", id: 1},
+        {name: "FF", id: 2},
+        {name: "CS", id: 3},
     ])
+
+    useEffect(() => {
+        get(url.GET_TICKETSTATUS).then(data => {
+            console.log(data)
+            setItems(data)
+        })
+    }, [])
+
+
+
+
 
     return (
         <React.Fragment>
@@ -46,13 +58,14 @@ function Index() {
                                         className="list-group"
                                     >
                                         {items.map((item, index) => (
-                                            <Reorder.Item key={item} value={item}
+                                            <Reorder.Item key={item.id} value={item}
                                                 className="list-group-item"
                                                 padding={10}
                                                 margin={10}
+                                                
                                             >
                                                 <span>{index + 1}</span>
-                                                {item}
+                                                {item.name}
                                             </Reorder.Item>
                                         ))}
                                     </Reorder.Group>
