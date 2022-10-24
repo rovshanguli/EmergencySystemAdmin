@@ -13,8 +13,7 @@ import Pages500 from "../pages/Utility/pages-500"
 
 
 
-//Dashboard
-import Dashboard from "../pages/Dashboard/index"
+
 
 
 // Info
@@ -38,6 +37,9 @@ import Brigades from "../pages/Brigades/Index"
 //Tickets
 import Tickets from "../pages/Ticket/Index"
 import TicketDetail from "../pages/Ticket/TicketDetail.jsx"
+
+//Dashboard
+import Dashboard from "../pages/Dashboard1/Index"
 
 
 // Authentication related pages
@@ -83,6 +85,9 @@ const userRoutes = [
   // //Ticket
   { path: "/ticket", component: Tickets },
   { path: "/ticketdetail/:id", component: TicketDetail },
+
+  // // Dashboard
+  { path: "/dashboard", component: Dashboard },
 
 
 

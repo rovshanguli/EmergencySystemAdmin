@@ -3,7 +3,8 @@ import Breadcrumbs from "../../components/Common/Breadcrumb"
 import ReactAudioPlayer from 'react-audio-player';
 import { post, del, get, put } from "../../helpers/api_helper";
 import * as url from "../../helpers/url_helper";
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player';
+import Map from "../../pages/Maps/StaticMap";
 
 import {
     Card,
@@ -43,9 +44,10 @@ function AppealDetail() {
     }, [])
 
 
-    console.log(appeal);
-
-
+    let center = {
+        lat: parseFloat(appeal?.lat),
+        lng: parseFloat(appeal?.long)
+    }
 
     return (
         <React.Fragment>
@@ -75,6 +77,9 @@ function AppealDetail() {
                                 <CardTitle className="mb-4">Appeal Image</CardTitle>
                                 {appeal?.image ? <img src={"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.image} alt="image" /> : <p>No Image</p>}
                             </CardBody>
+                            {
+                                center?.lat == NaN || center.long == NaN ? <div></div> : <Map center={center} />
+                            }
                         </Card>
                     </Col>
                 </Row>

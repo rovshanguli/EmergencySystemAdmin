@@ -11,6 +11,7 @@ import {
   CardImg
 } from "reactstrap"
 import { Link } from 'react-router-dom';
+import  HTMLRenderer  from "react-html-renderer";
 
 
 
@@ -92,26 +93,30 @@ function Index() {
                           </td>
                           <td>{item.translates[0].header}</td>
                           <td>
-                            <Button
-                              color="info"
-                              outline
-                              className="waves-effect waves-light"
-                              onClick={() => {
-                                tog_standard(item.id)
-                              }}
-                            >
-                              Info
-                            </Button>{" "}
-                            <Button
-                              color="danger"
-                              outline
-                              className="waves-effect waves-light"
-                              onClick={() => {
-                                deleteInfo(item.id)
-                              }}
-                            >
-                              Delete
-                            </Button>{" "}
+                            <Link className="waves-effect">
+                              <Button
+                                color="info"
+                                outline
+                                className="waves-effect waves-light"
+                                onClick={() => {
+                                  tog_standard(item.id)
+                                }}
+                              >
+                                Info
+                              </Button>{" "}
+                            </Link>
+                            <Link className='waves-effect'>
+                              <Button
+                                color="danger"
+                                outline
+                                className="waves-effect waves-light"
+                                onClick={() => {
+                                  deleteInfo(item.id)
+                                }}
+                              >
+                                Delete
+                              </Button>{" "}
+                            </Link>
                             <Link to={`/updateinfo/${item.id}`} className="waves-effect" >
                               <Button
                                 color="success"
@@ -159,7 +164,8 @@ function Index() {
                           </CardBody>
                         </Card>
                       </Col>
-                      <p>{info_data && info_data.translates[0]?.description}</p>
+                      {/* <p>{info_data && info_data.translates[0]?.description}</p> */}
+                      <HTMLRenderer html={info_data && info_data.translates[0]?.description} />
                     </div>
                   </Modal>
                 </Col>

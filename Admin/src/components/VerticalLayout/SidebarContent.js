@@ -88,6 +88,12 @@ const SidebarContent = props => {
           <ul className="metismenu list-unstyled" id="side-menu">
             <li className="menu-title">{props.t("Menu")} </li>
             <li>
+              <Link to="/dashboard" className="waves-effect">
+                <i className="mdi mdi-airplay"></i>
+                <span>Dashboard</span>
+              </Link>
+            </li>
+            <li>
               <Link to="/info" className="waves-effect">
                 <i className="mdi mdi-airplay"></i>
                 <span>Info</span>

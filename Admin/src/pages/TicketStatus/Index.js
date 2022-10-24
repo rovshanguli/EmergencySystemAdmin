@@ -39,14 +39,17 @@ function Index() {
                                 <CardBody>
 
                                     <Reorder.Group axis="y" values={items}
-                                        onReorder={setItems}
+                                        onReorder={function (params) {
+                                            console.log(params)
+                                            setItems(params)
+                                        }}
                                         className="list-group"
-                                         >
+                                    >
                                         {items.map((item, index) => (
                                             <Reorder.Item key={item} value={item}
-                                            className="list-group-item"
-                                            padding={10}
-                                            margin={10}
+                                                className="list-group-item"
+                                                padding={10}
+                                                margin={10}
                                             >
                                                 <span>{index + 1}</span>
                                                 {item}
