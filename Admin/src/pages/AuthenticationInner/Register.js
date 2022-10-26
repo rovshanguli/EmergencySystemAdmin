@@ -46,7 +46,6 @@ const Register = props => {
                   <div className="bg-login-overlay"></div>
                   <div className="position-relative">
                     <h5 className="text-white font-size-20">Free Register</h5>
-                    <p className="text-white-50 mb-0">Get your free Qovex account now</p>
                     <Link to="/" className="logo logo-admin mt-4">
                       <img src={logo} alt="" height="30" />
                     </Link>

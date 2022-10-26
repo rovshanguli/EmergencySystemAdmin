@@ -256,7 +256,7 @@ function Index() {
                                                     <select className="form-select" onChange={(e) => setSelectedBrigade(e.target.value)} size="20" aria-label="size 3 select example">
                                                         {brigade?.map((item, index) => {
                                                             return (
-                                                                <option disabled={item.isWorking} key={item.id} value={JSON.stringify(item)}>{item.name}</option>
+                                                                <option className='mb-2'  style={{fontSize:"20px", border:'2px solid black'}} disabled={item.isWorking} key={item.id} value={JSON.stringify(item)}>{item.name}</option>
                                                             )
                                                         })}
                                                     </select>

@@ -17,18 +17,15 @@ import { Reorder } from "framer-motion/dist/framer-motion";
 
 
 function Index() {
-    const [items, setItems] = useState([
-        {name: "GG", id: 1},
-        {name: "FF", id: 2},
-        {name: "CS", id: 3},
-    ])
+    const [items, setItems] = useState([])
 
     useEffect(() => {
         get(url.GET_TICKETSTATUS).then(data => {
-            console.log(data)
+            data.sort((a, b) => a.level - b.level)
             setItems(data)
         })
     }, [])
+
 
 
 
@@ -62,7 +59,6 @@ function Index() {
                                                 className="list-group-item"
                                                 padding={10}
                                                 margin={10}
-                                                
                                             >
                                                 <span>{index + 1}</span>
                                                 {item.name}

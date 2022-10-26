@@ -39,6 +39,7 @@ export const apiError = error => {
   return {
     type: API_ERROR,
     payload: error,
+    alert
   }
 }
 

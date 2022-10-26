@@ -1,4 +1,5 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects"
+import decode from 'jwt-claims';
 
 // Login Redux States
 import { LOGIN_USER, LOGOUT_USER, SOCIAL_LOGIN } from "./actionTypes"
@@ -31,18 +32,27 @@ function* loginUser({ payload: { user, history } }) {
       localStorage.setItem("authUser", JSON.stringify(response))
       yield put(loginSuccess(response))
     } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
-      
+      debugger
       const response = yield call(postFakeLogin, {
         username: user.username,
         password: user.password,
       })
+
+      var claims = decode(response)
+
+      if(claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] == "Admin"){
+        localStorage.setItem("authUser", JSON.stringify(response))
+        yield put(loginSuccess(response))
+        history.push("/dashboard")
+      }
+      else{
+        alert("You are not Admin")
+      }
       
-      localStorage.setItem("authUser", JSON.stringify(response))
-      yield put(loginSuccess(response))
     }
-    history.push("/dashboard")
+    
   } catch (error) {
-    yield put(apiError(error))
+    alert("Mail or Password is incorrect")
   }
 }
 
@@ -87,5 +97,7 @@ function* authSaga() {
   yield takeLatest(SOCIAL_LOGIN, socialLogin)
   yield takeEvery(LOGOUT_USER, logoutUser)
 }
+
+
 
 export default authSaga

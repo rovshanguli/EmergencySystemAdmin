@@ -3766,6 +3766,11 @@
   "resolved" "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz"
   "version" "1.5.1"
 
+"base64-js@0.0.8":
+  "integrity" "sha512-3XSA2cR/h/73EzlXXdU6YNycmYI7+kicTxks4eJg2g39biHR84slg2+des+p7iHYhbRg/udIS4TD53WabcOUkw=="
+  "resolved" "https://registry.npmjs.org/base64-js/-/base64-js-0.0.8.tgz"
+  "version" "0.0.8"
+
 "batch@0.6.1":
   "integrity" "sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw=="
   "resolved" "https://registry.npmjs.org/batch/-/batch-0.6.1.tgz"
@@ -9197,6 +9202,13 @@
   "version" "3.1.1"
   dependencies:
     "jquery" ">=1.7"
+
+"jwt-claims@^1.0.1":
+  "integrity" "sha512-2HknC59pj5kbuUcfNPJCLmUggn8CiYTLdHBkdwCWi7XYWxkHZejKtV9lNyfR1dlXA1cHH9LAhVnlA5M4yDhw5g=="
+  "resolved" "https://registry.npmjs.org/jwt-claims/-/jwt-claims-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "base64-js" "0.0.8"
 
 "kdbush@^3.0.0":
   "integrity" "sha512-hRkd6/XW4HTsA9vjVpY9tuXJYLSlelnkTmVFu4M9/7MIYQtFcHpbugAU7UbOfjOiVSVYl2fqgBuJ32JUmRo5Ew=="

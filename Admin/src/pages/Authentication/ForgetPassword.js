@@ -93,14 +93,7 @@ const ForgetPasswordPage = props => {
                   </div>
                 </div>
               </div>
-              <div className="mt-5 text-center">
-                  <p>Remember It ? <Link href="/login" className="fw-medium text-primary"> Sign In
-                                here</Link> </p>
-                  <p>
-                    © {new Date().getFullYear()} Qovex. Crafted with{" "}
-                    <i className="mdi mdi-heart text-danger" /> by Themesbrand
-                </p>
-                </div>
+              
             </Col>
           </Row>
         </Container>
