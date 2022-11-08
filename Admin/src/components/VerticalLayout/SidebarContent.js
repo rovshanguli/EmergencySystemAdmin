@@ -87,12 +87,12 @@ const SidebarContent = props => {
         <div id="sidebar-menu">
           <ul className="metismenu list-unstyled" id="side-menu">
             <li className="menu-title">{props.t("Menu")} </li>
-            <li>
+            {/* <li>
               <Link to="/dashboard" className="waves-effect">
                 <i className="mdi mdi-airplay"></i>
                 <span>Dashboard</span>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/info" className="waves-effect">
                 <i className="mdi mdi-airplay"></i>
@@ -106,12 +106,12 @@ const SidebarContent = props => {
                 <span>{props.t("Appeal Type")}</span>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/ticketstatus" className="waves-effect">
                 <i className="mdi mdi-inbox-full"></i>
                 <span>{props.t("Ticket Status")}</span>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/appeal" className="waves-effect">
                 <i className="mdi mdi-inbox-full"></i>

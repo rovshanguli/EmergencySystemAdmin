@@ -63,7 +63,7 @@ function CreateInfo() {
         }
         axios.post('http://emeergencyapp.us-east-1.elasticbeanstalk.com/api/info/create', formData)
             .then(res => {
-                console.log(res);
+                alert("Info created successfully");
             })
     }
 

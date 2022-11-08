@@ -98,7 +98,7 @@ function Index() {
         }
         post(url.CREATE_TICKET, data, config).then(res => {
             console.log(res);
-            if (res.status === 200) {
+            if (true) {
                 alert("Tiket yaradildi")
             }
             else {

@@ -104,7 +104,7 @@ function UpdateInfo() {
             photo: infofile,
             translates: translates
         }
-        axios.put('https://localhost:7045/api/Info/Update', data)
+        axios.put('https://localhost:44495/api/Info/Update', data)
             .then(res => {
                 console.log(res.data);
             })

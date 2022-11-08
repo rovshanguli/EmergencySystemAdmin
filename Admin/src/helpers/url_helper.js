@@ -40,3 +40,6 @@ export const GET_TICKET_BY_ID = base + "api/Ticket/GetWithAppeals/"
 
 //Ticket Status
 export const GET_TICKETSTATUS = base + "api/TicketStatus/GetAllLevel"
+
+//Dashboard
+export const GET_APPEA_STATISTICS = base + "api/Dashboard/GetAppealStatistics"

@@ -5,18 +5,18 @@ import italy from "../assets/images/flags/italy.jpg"
 import russia from "../assets/images/flags/russia.jpg"
 
 const languages = {
-  sp: {
-    label: "Spanish",
-    flag: spain,
-  },
-  gr: {
-    label: "German",
-    flag: germany,
-  },
-  it: {
-    label: "Italian",
-    flag: italy,
-  },
+  // sp: {
+  //   label: "Spanish",
+  //   flag: spain,
+  // },
+  // gr: {
+  //   label: "German",
+  //   flag: germany,
+  // },
+  // it: {
+  //   label: "Italian",
+  //   flag: italy,
+  // },
   rs: {
     label: "Russian",
     flag: russia,

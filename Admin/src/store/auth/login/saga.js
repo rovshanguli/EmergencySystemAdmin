@@ -39,11 +39,12 @@ function* loginUser({ payload: { user, history } }) {
       })
 
       var claims = decode(response)
+      console.log(claims);
 
-      if(claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] == "Admin"){
+      if(claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes("Admin")){
         localStorage.setItem("authUser", JSON.stringify(response))
         yield put(loginSuccess(response))
-        history.push("/dashboard")
+        history.push("/appeal")
       }
       else{
         alert("You are not Admin")

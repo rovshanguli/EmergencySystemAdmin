@@ -27,11 +27,12 @@ function Index() {
         setLoading(true)
         get(url.GET_BRIGADE, config)
             .then(response => {
+                console.log(response);
                 setBrigades(response)
                 setLoading(false)
             })
             .catch(error => {
-                setError(error)
+                console.log(error);
                 setLoading(false)
             })
     }, [])
@@ -46,7 +47,6 @@ function Index() {
     
 
     const registerBrigade = () => {
-        debugger
         if (password === confirm_password) {
             let data = {
                 username: name,
@@ -103,14 +103,14 @@ function Index() {
                                         </thead>
                                         <tbody>
                                             {error && <tr><td>{error}</td></tr>}
-                                            {brigades.map((brigade, index) => (
+                                            {brigades?.map((brigade, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index+1}</th>
-                                                    <td>{brigade.name}</td>
-                                                    <td>{brigade.region}</td>
+                                                    <td>{brigade?.name}</td>
+                                                    <td>{brigade?.region}</td>
                                                     <td>
                                                         {
-                                                            brigade.isWorking ? <span className="badge badge-soft-success font-size-12">Working</span> : <span className="badge badge-soft-danger font-size-12">Not Working</span>
+                                                            brigade?.isWorking ? <span className="badge badge-soft-success font-size-12">Working</span> : <span className="badge badge-soft-danger font-size-12">Not Working</span>
                                                         }
                                                     </td>
                                                 </tr>

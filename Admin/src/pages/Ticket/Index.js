@@ -21,7 +21,7 @@ function Index() {
 
     const handlePageChange = (e, value) => {
         e.preventDefault();
-        get(url.GET_TICKET_PAGINATE + value).then(res => {
+        get(url.GET_TICKET_PAGINATE + value,config).then(res => {
             setTickets(res)
         })
     };

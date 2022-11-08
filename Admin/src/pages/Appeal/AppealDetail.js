@@ -49,6 +49,8 @@ function AppealDetail() {
         lng: parseFloat(appeal?.long)
     }
 
+
+
     return (
         <React.Fragment>
             <div className="page-content">
@@ -77,9 +79,9 @@ function AppealDetail() {
                                 <CardTitle className="mb-4">Appeal Image</CardTitle>
                                 {appeal?.image ? <img src={"http://emeergencyapp.us-east-1.elasticbeanstalk.com/" + appeal?.image} alt="image" /> : <p>No Image</p>}
                             </CardBody>
-                            {
+                            {/* {
                                 center?.lat == NaN || center.long == NaN ? <div></div> : <Map center={center} />
-                            }
+                            } */}
                         </Card>
                     </Col>
                 </Row>

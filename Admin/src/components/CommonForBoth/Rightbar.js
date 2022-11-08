@@ -48,7 +48,7 @@ const RightSidebar = props => {
             <hr className="my-0" />
 
             <div className="p-4">
-              <div className="radio-toolbar">
+              {/* <div className="radio-toolbar">
                 <span className="mb-2 d-block">Layouts</span>
                 <input
                   type="radio"
@@ -79,7 +79,7 @@ const RightSidebar = props => {
                 <label htmlFor="radioHorizontal">Horizontal</label>
               </div>
 
-              <hr className="mt-1" />
+              <hr className="mt-1" /> */}
 
               <div className="radio-toolbar">
                 <span className="mb-2 d-block" id="radio-title">
